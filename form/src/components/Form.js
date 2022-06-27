@@ -1,16 +1,6 @@
 import React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';  -- line 41
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from "@mui/material";
+// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';  ?????
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState, useMemo, useEffect } from "react";
@@ -22,8 +12,7 @@ const theme = createTheme();
 export default function SignUp() {
   const [value, setValue] = useState("");
   const options = useMemo(() => countryList().getData(), []);
-  const [longitude, setLongitude] = useState("");
-  const [latitude, setLatitude] = useState("");
+
 
   useEffect(() => {
     getMyLocation();
