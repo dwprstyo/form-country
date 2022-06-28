@@ -148,12 +148,13 @@ export default function SignUp() {
                   disablePortal
                   options={options}
                   value={value}
-                  onChange={(_event, newTeam) => {
-                    setValue(newTeam);
+                  onChange={(_event, value) => {
+                    setValue(value);
                   }}
                   renderInput={(params) => (
                     <TextField {...params} label="Select Country" />
                   )}
+                  isOptionEqualToValue={(option, value) => option.id === value.id}
                 />
               </Grid>
               <Grid item xs={12}>
