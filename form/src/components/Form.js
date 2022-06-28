@@ -37,7 +37,7 @@ export default function SignUp() {
       .get(`https://ipinfo.io/geo?token=d220494edb935b`)
       .then((res) => {
         const codecountry = res.data.country;
-        const convert = codetocountry.countries[codecountry].name;
+        const convert = codetocountry.countries[codecountry].name
         setValue(convert);
       })
       .catch((err) => {
@@ -47,6 +47,7 @@ export default function SignUp() {
 
   const changeHandler = (e) => {
     setValue(e.target.value);
+    console.log(e);
   };
 
   const handleSubmit = (event) => {
@@ -147,6 +148,9 @@ export default function SignUp() {
                   disablePortal
                   options={options}
                   value={value}
+                  onChange={(_event, newTeam) => {
+                    setValue(newTeam);
+                  }}
                   renderInput={(params) => (
                     <TextField {...params} label="Select Country" />
                   )}
