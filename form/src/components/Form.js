@@ -1,10 +1,24 @@
 import React from "react";
-import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  Autocomplete
+} from "@mui/material";
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined';  ?????
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState, useMemo, useEffect } from "react";
 import countryList from "react-select-country-list";
+import codetocountry from "country-data";
 import axios from "axios";
 
 const theme = createTheme();
@@ -19,29 +33,16 @@ export default function SignUp() {
   }, []);
 
   const getMyLocation = () => {
-    const location = window.navigator && window.navigator.geolocation;
-
-    if (location) {
-      location.getCurrentPosition(
-        (position) => {
-          const { longitude, latitude } = position.coords;
-          axios
-            .get(
-              `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=1c4eee0849dd47c5763a3c86af127c83`
-            )
-            .then((res) => {
-              console.log(res.data[0].country);
-              setValue(res.data[0].country);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
+    axios
+      .get(`https://ipinfo.io/geo?token=d220494edb935b`)
+      .then((res) => {
+        const codecountry = res.data.country;
+        const convert = codetocountry.countries[codecountry].name;
+        setValue(convert);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const changeHandler = (e) => {
@@ -124,7 +125,7 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <FormControl fullWidth>
                   <InputLabel id="country">Select Country</InputLabel>
                   <Select
@@ -140,6 +141,16 @@ export default function SignUp() {
                     ))}
                   </Select>
                 </FormControl>
+              </Grid> */}
+              <Grid item xs={12}>
+                <Autocomplete
+                  disablePortal
+                  options={options}
+                  value={value}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Select Country" />
+                  )}
+                />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel

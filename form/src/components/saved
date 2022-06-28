@@ -1,0 +1,22 @@
+    if (location) {
+      location.getCurrentPosition(
+        (position) => {
+          const { longitude, latitude } = position.coords;
+          axios
+            .get(
+              `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=1c4eee0849dd47c5763a3c86af127c83`
+            )
+            .then((res) => {
+              console.log(res.data[0].country);
+              setValue(res.data[0].country);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  };
