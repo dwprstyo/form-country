@@ -56,6 +56,7 @@ export default function SignUp() {
     console.log({
       email: data.get("email"),
       password: data.get("password"),
+      country: data.get("country")
     });
   };
 
@@ -126,26 +127,10 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              {/* <Grid item xs={12}>
-                <FormControl fullWidth>
-                  <InputLabel id="country">Select Country</InputLabel>
-                  <Select
-                    options={options}
-                    value={value}
-                    onChange={changeHandler}
-                    label="Select Country"
-                  >
-                    {options.map((item) => (
-                      <MenuItem key={item.value} value={item.value}>
-                        {item.label}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid> */}
               <Grid item xs={12}>
                 <Autocomplete
                   disablePortal
+                  id="country"
                   options={options}
                   value={value}
                   onChange={(_event, value) => {
